@@ -38,7 +38,7 @@ export class ConsoleViewer extends React.Component{
     shard: string | false
   }
 
-  socket: SocketIOClient.Socket
+  socket: SocketIOClient.Socket | undefined
 
   messagesEnd: any
 
@@ -125,9 +125,9 @@ export class ConsoleViewer extends React.Component{
     ReactGA.event({
       category: 'Console',
       action: 'Connected Console to Screeps'
-    })
+    });
 
-    this.socket.emit('connect-console', {token: this.state.token})
+    (this.socket as SocketIOClient.Socket).emit('connect-console', {token: this.state.token})
   }
 
   messages(){
